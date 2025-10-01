@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { fhirResources, FHIRResource } from '@/data/fhirResources';
 import { ResourceCard } from '@/components/ResourceCard';
+import { ResourceRelationshipDiagram } from '@/components/ResourceRelationshipDiagram';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Search, Flame } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { Search, Flame, BookOpen, Network } from 'lucide-react';
 
 const ResourceLibrary = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -50,6 +52,46 @@ const ResourceLibrary = () => {
       </header>
 
       <main className="container mx-auto px-4 py-8">
+        {/* FHIR Introduction */}
+        <div className="mb-12 space-y-6">
+          <Card className="p-6 bg-card shadow-card">
+            <div className="flex items-start gap-4">
+              <div className="p-3 rounded-lg bg-primary/10">
+                <BookOpen className="w-6 h-6 text-primary" />
+              </div>
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold mb-3">What is FHIR?</h2>
+                <p className="text-muted-foreground mb-4">
+                  <strong>FHIR (Fast Healthcare Interoperability Resources)</strong> is a standard for exchanging healthcare information electronically. 
+                  Think of it as a common language that allows different healthcare systems to communicate seamlessly.
+                </p>
+                <div className="grid md:grid-cols-3 gap-4 mb-4">
+                  <div className="p-4 rounded-lg bg-primary/5 border border-primary/10">
+                    <h3 className="font-semibold mb-2 text-sm">🔥 Resources</h3>
+                    <p className="text-xs text-muted-foreground">
+                      Building blocks like Patient, Observation, and Medication that represent healthcare data
+                    </p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-primary/5 border border-primary/10">
+                    <h3 className="font-semibold mb-2 text-sm">🔗 References</h3>
+                    <p className="text-xs text-muted-foreground">
+                      Resources connect to each other, creating a web of healthcare information
+                    </p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-primary/5 border border-primary/10">
+                    <h3 className="font-semibold mb-2 text-sm">🌐 RESTful API</h3>
+                    <p className="text-xs text-muted-foreground">
+                      Standard HTTP methods (GET, POST, PUT, DELETE) for easy integration
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <ResourceRelationshipDiagram />
+        </div>
+
         {/* Category Filters */}
         <div className="flex flex-wrap gap-2 mb-8">
           <Badge

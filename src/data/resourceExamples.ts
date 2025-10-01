@@ -206,6 +206,234 @@ export const patientExamples: ResourceExample[] = [
   }
 ];
 
+export const observationExamples: ResourceExample[] = [
+  {
+    resourceId: 'observation',
+    difficulty: 'simple',
+    data: {
+      resourceType: 'Observation',
+      id: 'example',
+      status: 'final',
+      code: {
+        text: 'Body Weight'
+      },
+      subject: {
+        reference: 'Patient/example'
+      },
+      valueQuantity: {
+        value: 185,
+        unit: 'lbs'
+      }
+    }
+  },
+  {
+    resourceId: 'observation',
+    difficulty: 'moderate',
+    data: {
+      resourceType: 'Observation',
+      id: 'example-moderate',
+      status: 'final',
+      code: {
+        coding: [
+          {
+            system: 'http://loinc.org',
+            code: '29463-7',
+            display: 'Body Weight'
+          }
+        ],
+        text: 'Body Weight'
+      },
+      subject: {
+        reference: 'Patient/example'
+      },
+      effectiveDateTime: '2024-01-15',
+      valueQuantity: {
+        value: 84,
+        unit: 'kg',
+        system: 'http://unitsofmeasure.org',
+        code: 'kg'
+      }
+    }
+  },
+  {
+    resourceId: 'observation',
+    difficulty: 'complex',
+    data: {
+      resourceType: 'Observation',
+      id: 'example-complex',
+      status: 'final',
+      category: [
+        {
+          coding: [
+            {
+              system: 'http://terminology.hl7.org/CodeSystem/observation-category',
+              code: 'vital-signs'
+            }
+          ]
+        }
+      ],
+      code: {
+        coding: [
+          {
+            system: 'http://loinc.org',
+            code: '29463-7',
+            display: 'Body Weight'
+          }
+        ],
+        text: 'Body Weight'
+      },
+      subject: {
+        reference: 'Patient/example'
+      },
+      encounter: {
+        reference: 'Encounter/example'
+      },
+      effectiveDateTime: '2024-01-15T14:30:00Z',
+      valueQuantity: {
+        value: 84,
+        unit: 'kg',
+        system: 'http://unitsofmeasure.org',
+        code: 'kg'
+      },
+      performer: [
+        {
+          reference: 'Practitioner/example'
+        }
+      ]
+    }
+  }
+];
+
+export const encounterExamples: ResourceExample[] = [
+  {
+    resourceId: 'encounter',
+    difficulty: 'simple',
+    data: {
+      resourceType: 'Encounter',
+      id: 'example',
+      status: 'finished',
+      class: {
+        code: 'outpatient'
+      },
+      subject: {
+        reference: 'Patient/example'
+      }
+    }
+  },
+  {
+    resourceId: 'encounter',
+    difficulty: 'moderate',
+    data: {
+      resourceType: 'Encounter',
+      id: 'example-moderate',
+      status: 'finished',
+      class: {
+        system: 'http://terminology.hl7.org/CodeSystem/v3-ActCode',
+        code: 'AMB',
+        display: 'ambulatory'
+      },
+      subject: {
+        reference: 'Patient/example'
+      },
+      period: {
+        start: '2024-01-15T09:00:00Z',
+        end: '2024-01-15T10:30:00Z'
+      }
+    }
+  },
+  {
+    resourceId: 'encounter',
+    difficulty: 'complex',
+    data: {
+      resourceType: 'Encounter',
+      id: 'example-complex',
+      status: 'finished',
+      class: {
+        system: 'http://terminology.hl7.org/CodeSystem/v3-ActCode',
+        code: 'AMB',
+        display: 'ambulatory'
+      },
+      type: [
+        {
+          coding: [
+            {
+              system: 'http://snomed.info/sct',
+              code: '162673000',
+              display: 'General examination'
+            }
+          ]
+        }
+      ],
+      subject: {
+        reference: 'Patient/example'
+      },
+      participant: [
+        {
+          individual: {
+            reference: 'Practitioner/example',
+            display: 'Dr. Adam Careful'
+          }
+        }
+      ],
+      period: {
+        start: '2024-01-15T09:00:00Z',
+        end: '2024-01-15T10:30:00Z'
+      },
+      reasonCode: [
+        {
+          coding: [
+            {
+              system: 'http://snomed.info/sct',
+              code: '33879002',
+              display: 'Annual physical'
+            }
+          ]
+        }
+      ]
+    }
+  }
+];
+
+// Simplified examples for other resources
+const createSimpleExamples = (resourceType: string, resourceId: string): ResourceExample[] => [
+  {
+    resourceId,
+    difficulty: 'simple',
+    data: {
+      resourceType,
+      id: 'example',
+      status: 'active'
+    }
+  },
+  {
+    resourceId,
+    difficulty: 'moderate',
+    data: {
+      resourceType,
+      id: 'example-moderate',
+      status: 'active'
+    }
+  },
+  {
+    resourceId,
+    difficulty: 'complex',
+    data: {
+      resourceType,
+      id: 'example-complex',
+      status: 'active'
+    }
+  }
+];
+
 export const resourceExamples: Record<string, ResourceExample[]> = {
-  patient: patientExamples
+  patient: patientExamples,
+  observation: observationExamples,
+  encounter: encounterExamples,
+  practitioner: createSimpleExamples('Practitioner', 'practitioner'),
+  condition: createSimpleExamples('Condition', 'condition'),
+  'medication-request': createSimpleExamples('MedicationRequest', 'medication-request'),
+  procedure: createSimpleExamples('Procedure', 'procedure'),
+  'diagnostic-report': createSimpleExamples('DiagnosticReport', 'diagnostic-report'),
+  organization: createSimpleExamples('Organization', 'organization'),
+  medication: createSimpleExamples('Medication', 'medication')
 };

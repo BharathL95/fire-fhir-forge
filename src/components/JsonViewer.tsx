@@ -113,11 +113,22 @@ export const JsonViewer = ({ examples, onPathClick, highlightedPath }: JsonViewe
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col">
-        <TabsList className="mx-4 mt-3">
-          <TabsTrigger value="simple">Simple</TabsTrigger>
-          <TabsTrigger value="moderate">Moderate</TabsTrigger>
-          <TabsTrigger value="complex">Complex</TabsTrigger>
-        </TabsList>
+        <div className="mx-4 mt-3 space-y-2">
+          <div className="text-xs text-muted-foreground">
+            Choose complexity level to see different example structures:
+          </div>
+          <TabsList className="w-full">
+            <TabsTrigger value="simple" className="flex-1" title="Basic structure with minimal required fields">
+              Simple
+            </TabsTrigger>
+            <TabsTrigger value="moderate" className="flex-1" title="Common use case with typical fields">
+              Moderate
+            </TabsTrigger>
+            <TabsTrigger value="complex" className="flex-1" title="Advanced example with detailed information">
+              Complex
+            </TabsTrigger>
+          </TabsList>
+        </div>
 
         {examples.map((example) => (
           <TabsContent

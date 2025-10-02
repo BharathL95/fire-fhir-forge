@@ -100,7 +100,7 @@ export const JsonViewer = ({ examples, onPathClick, highlightedPath }: JsonViewe
   };
 
   return (
-    <div className="bg-card rounded-lg border shadow-card overflow-hidden h-full flex flex-col">
+    <div className="bg-card rounded-lg border shadow-card overflow-hidden h-full min-h-0 flex flex-col">
       <div className="border-b px-4 py-3 flex items-center justify-between sticky top-0 bg-card z-10">
         <h3 className="font-semibold text-sm">Example JSON</h3>
         <Button
@@ -112,7 +112,7 @@ export const JsonViewer = ({ examples, onPathClick, highlightedPath }: JsonViewe
         </Button>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 min-h-0 flex flex-col">
         <div className="mx-4 mt-3 space-y-2">
           <div className="text-xs text-muted-foreground">
             Choose complexity level to see different example structures:

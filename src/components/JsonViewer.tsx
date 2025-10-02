@@ -134,9 +134,9 @@ export const JsonViewer = ({ examples, onPathClick, highlightedPath }: JsonViewe
           <TabsContent
             key={example.difficulty}
             value={example.difficulty}
-            className="flex-1 m-0 mt-4 overflow-y-auto"
+            className="flex-1 min-h-0 m-0 mt-4 overflow-y-auto"
           >
-            <pre className="font-mono text-sm p-4">
+            <pre className="font-mono text-sm p-4 overflow-x-auto">
               {renderJsonWithHighlight(example.data)}
             </pre>
           </TabsContent>

@@ -86,9 +86,9 @@ const ResourceDetail = () => {
 
       {/* Split View */}
       <main className="flex-1 container mx-auto px-4 py-6">
-        <div className="grid lg:grid-cols-2 gap-6 h-[calc(100vh-180px)]">
+        <div className="grid lg:grid-cols-2 gap-6 h-[calc(100vh-180px)] min-h-0">
           {/* Schema Tree - Left Panel */}
-          <div className="overflow-auto">
+          <div className="min-h-0 h-full overflow-auto">
             <SchemaTree
               elements={schema.elements}
               onElementClick={handleSchemaClick}
@@ -97,7 +97,7 @@ const ResourceDetail = () => {
           </div>
 
           {/* JSON Examples - Right Panel */}
-          <div className="overflow-auto">
+          <div className="min-h-0 h-full">
             <JsonViewer
               examples={examples}
               onPathClick={handleJsonClick}

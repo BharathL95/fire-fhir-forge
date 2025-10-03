@@ -61,9 +61,27 @@ const SchemaNode = ({ element, level, onElementClick, highlightedPath }: SchemaN
           {element.dataType}
         </span>
 
-        <Badge variant="outline" className="text-xs px-2 py-0">
-          {element.cardinality}
-        </Badge>
+        <TooltipProvider delayDuration={300}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Badge variant="outline" className="text-xs px-2 py-0 cursor-help">
+                {element.cardinality}
+              </Badge>
+            </TooltipTrigger>
+            <TooltipContent side="right" className="max-w-xs">
+              <p className="text-sm font-semibold mb-1">Cardinality</p>
+              <p className="text-xs text-muted-foreground">
+                Defines minimum and maximum occurrences. Format: min..max
+              </p>
+              <ul className="text-xs text-muted-foreground mt-2 space-y-1">
+                <li><code className="bg-muted px-1 rounded">0..1</code> = Optional, max one</li>
+                <li><code className="bg-muted px-1 rounded">1..1</code> = Required, exactly one</li>
+                <li><code className="bg-muted px-1 rounded">0..*</code> = Optional, multiple allowed</li>
+                <li><code className="bg-muted px-1 rounded">1..*</code> = Required, at least one</li>
+              </ul>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
 
         <TooltipProvider delayDuration={300}>
           <Tooltip>

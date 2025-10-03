@@ -21,7 +21,7 @@ const RelationshipArrow = ({ label, className = '' }: { label: string; className
 export const ResourceRelationshipDiagram = () => {
   return (
     <Card className="p-6 bg-gradient-hero border-primary/20">
-      <h3 className="text-lg font-semibold mb-6 text-center">How FHIR Resources Connect</h3>
+      <h3 className="text-lg font-semibold mb-6 text-center">Here is an example of how some FHIR resources connect</h3>
       
       <div className="flex flex-col items-center gap-6">
         {/* Patient at top */}

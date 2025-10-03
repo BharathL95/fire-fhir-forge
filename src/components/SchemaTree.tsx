@@ -61,39 +61,35 @@ const SchemaNode = ({ element, level, onElementClick, highlightedPath }: SchemaN
           {element.dataType}
         </span>
 
-        <TooltipProvider delayDuration={300}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Badge variant="outline" className="text-xs px-2 py-0 cursor-help">
-                {element.cardinality}
-              </Badge>
-            </TooltipTrigger>
-            <TooltipContent side="right" className="max-w-xs">
-              <p className="text-sm font-semibold mb-1">Cardinality</p>
-              <p className="text-xs text-muted-foreground">
-                Defines minimum and maximum occurrences. Format: min..max
-              </p>
-              <ul className="text-xs text-muted-foreground mt-2 space-y-1">
-                <li><code className="bg-muted px-1 rounded">0..1</code> = Optional, max one</li>
-                <li><code className="bg-muted px-1 rounded">1..1</code> = Required, exactly one</li>
-                <li><code className="bg-muted px-1 rounded">0..*</code> = Optional, multiple allowed</li>
-                <li><code className="bg-muted px-1 rounded">1..*</code> = Required, at least one</li>
-              </ul>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Badge variant="outline" className="text-xs px-2 py-0 cursor-help">
+              {element.cardinality}
+            </Badge>
+          </TooltipTrigger>
+          <TooltipContent side="right" className="max-w-xs">
+            <p className="text-sm font-semibold mb-1">Cardinality</p>
+            <p className="text-xs text-muted-foreground">
+              Defines minimum and maximum occurrences. Format: min..max
+            </p>
+            <ul className="text-xs text-muted-foreground mt-2 space-y-1">
+              <li><code className="bg-muted px-1 rounded">0..1</code> = Optional, max one</li>
+              <li><code className="bg-muted px-1 rounded">1..1</code> = Required, exactly one</li>
+              <li><code className="bg-muted px-1 rounded">0..*</code> = Optional, multiple allowed</li>
+              <li><code className="bg-muted px-1 rounded">1..*</code> = Required, at least one</li>
+            </ul>
+          </TooltipContent>
+        </Tooltip>
 
-        <TooltipProvider delayDuration={300}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Info className="w-4 h-4 text-muted-foreground hover:text-foreground transition-colors" />
-            </TooltipTrigger>
-            <TooltipContent side="right" className="max-w-xs">
-              <p className="text-sm">{element.description}</p>
-              <p className="text-xs text-muted-foreground mt-2">Path: {element.path}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Info className="w-4 h-4 text-muted-foreground hover:text-foreground transition-colors" />
+          </TooltipTrigger>
+          <TooltipContent side="right" className="max-w-xs">
+            <p className="text-sm">{element.description}</p>
+            <p className="text-xs text-muted-foreground mt-2">Path: {element.path}</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
 
       {hasChildren && isExpanded && (
@@ -115,24 +111,26 @@ const SchemaNode = ({ element, level, onElementClick, highlightedPath }: SchemaN
 
 export const SchemaTree = ({ elements, onElementClick, highlightedPath }: SchemaTreeProps) => {
   return (
-    <div className="bg-card rounded-lg border shadow-card overflow-auto">
-      <div className="sticky top-0 bg-card border-b px-4 py-3 z-10">
-        <h3 className="font-semibold text-sm flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-primary" />
-          Resource Schema
-        </h3>
+    <TooltipProvider delayDuration={300}>
+      <div className="bg-card rounded-lg border shadow-card overflow-auto">
+        <div className="sticky top-0 bg-card border-b px-4 py-3 z-10">
+          <h3 className="font-semibold text-sm flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 text-primary" />
+            Resource Schema
+          </h3>
+        </div>
+        <div className="p-2">
+          {elements.map((element) => (
+            <SchemaNode
+              key={element.path}
+              element={element}
+              level={0}
+              onElementClick={onElementClick}
+              highlightedPath={highlightedPath}
+            />
+          ))}
+        </div>
       </div>
-      <div className="p-2">
-        {elements.map((element) => (
-          <SchemaNode
-            key={element.path}
-            element={element}
-            level={0}
-            onElementClick={onElementClick}
-            highlightedPath={highlightedPath}
-          />
-        ))}
-      </div>
-    </div>
+    </TooltipProvider>
   );
 };

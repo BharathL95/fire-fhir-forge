@@ -90,9 +90,12 @@ const SchemaNode = ({ element, level, onElementClick, highlightedPath }: SchemaN
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <Badge variant="outline" className="text-xs px-2 py-0 cursor-pointer">
-              {element.cardinality}
-            </Badge>
+            <div className="flex items-center gap-1 cursor-help">
+              <Badge variant="outline" className="text-xs px-2 py-0">
+                {element.cardinality}
+              </Badge>
+              <Info className="w-3 h-3 text-muted-foreground" />
+            </div>
           </TooltipTrigger>
           <TooltipContent side="right" className="max-w-[300px]">
             <div className="space-y-2">
